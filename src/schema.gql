@@ -1,0 +1,62 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+type LoginUserOutput {
+  token: String!
+  user: User!
+}
+
+type Mutation {
+  createPost(newPostInput: NewPostInput!): Post!
+  login(loginInput: LoginUserInput!): LoginUserOutput!
+  registerUser(newUserInput: NewUserInput!): User!
+}
+
+input NewPostInput {
+  content: String
+  title: String!
+}
+
+input NewUserInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+type PaginatedPost {
+  list: [Post!]
+  pagination: PostPaginated
+}
+
+"""blog posts"""
+type Post {
+  _id: ID!
+  content: String
+  title: String
+  user: User
+}
+
+type PostPaginated {
+  currentPage: Float!
+  lastPage: Float!
+  perPage: Float!
+  total: Float!
+}
+
+type Query {
+  getProfile: User!
+  posts(pageNumber: Float = 1, pageSize: Float = 10, testArg: String): PaginatedPost!
+}
+
+"""user model"""
+type User {
+  _id: ID!
+  email: String!
+  name: String!
+}

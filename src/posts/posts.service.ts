@@ -18,6 +18,8 @@ export class PostsService {
 
     // query posts from db
     const query = this.postModel.find({}, {});
+
+    // get pagination data
     const total = await query.clone().countDocuments();
     const pagination = getPaginationMetaData({
       pageNumber,
@@ -26,10 +28,10 @@ export class PostsService {
     });
 
     // exec query
-    const posts = await query.limit(pageSize).skip(skip).populate('user');
+    const list = await query.limit(pageSize).skip(skip).populate('user');
 
     return {
-      list: posts,
+      list,
       pagination,
     };
   }
